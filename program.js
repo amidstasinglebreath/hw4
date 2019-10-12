@@ -15,7 +15,8 @@ var option0 = document.querySelector("#option0");
 var option1 = document.querySelector("#option1");
 var option2 = document.querySelector("#option2");
 var option3 = document.querySelector("#option3");
-var quizTitle = document.querySelector("#quiz-header");
+var quizTitle = document.querySelector(".quiz-header");
+var timeDisplay = document.querySelector("#time-display");
 
 // document attatchment utilizations
 var optionIndex = [option0, option1, option2, option3];
@@ -23,12 +24,14 @@ var optionIndex = [option0, option1, option2, option3];
 
 // pseudo-constants
 var timeSet = 80;
-//var timeLeft = 80;
+var timeLeft = 0;
 var ansRight = 0;
 var ansWrong = 0;
 
 var turnNum = 5;
-var curTurn = 0;
+//var curTurn = 0;
+var finished = false;
+
 
 //will change if the available number of options is changed
 var optionNum = 4;
@@ -38,6 +41,14 @@ var optionNum = 4;
 var quizChoice = {
     title: "What kind of Quiz do you want to take?",
     choices: ["Coding", "Swords", "Mythology", "Quantum Physics"],
+    /*
+    loadList: function () {
+        quizTitle.textContent = this.title;
+        for (var i = 0; i < optionNum; i++) {
+            optionIndex[i].textContent = this.choices[i];
+        }
+    }
+    */
 
 }
 
@@ -111,8 +122,7 @@ var swordQuestions = [
 function correct() {
     ansRight++;
     answerState.textContent = "Correct!";
-    // non-functional
-    answerState.attr("class", "alert alert-success");
+    answerState.setAttribute("class", "alert alert-success");
 }
 
 //incorrect function
@@ -120,34 +130,74 @@ function inCorrect() {
     ansWrong++;
     timeLeft -= 10;
     answerState.textContent = "Incorrect!";
-    // non-functional
-    answerState.attr("class", "alert alert-danger");
+    answerState.setAttribute("class", "alert alert-danger");
 }
 
 // loading/populating function/method.
-/*
+
 function loadlist(quizFrame){
+    console.log(quizFrame);
     quizTitle.textContent = quizFrame.title;
     for (var i = 0; i < optionNum; i++){
-        optionIndex[i] = quizFrame.choices[i];
+        optionIndex[i].textContent = quizFrame.choices[i];
     }
     return 0;
 }
-*/
 
+
+// run quiz function:
+// preliminary time function
+function setTime() {
+    timeLeft = timeSet;
+    var timerInterval = setInterval(function() {
+      timeLeft--;
+      timeDisplay.textContent = timeLeft;
+  
+      if(timeLeft === 0) {
+        clearInterval(timerInterval);
+      }
+  
+    }, 1000);
+  }
+
+//internal logic function.
+//should take an array of questions
+function runQuiz (){
+    while (timeLeft > 0 && !finished){
+        // checks vs. time and finished variable
+        for (var curTurn = 0; curTurn < turnNum; curTurn++){
+            // calls loadlist for 
+            var choiceMade = false;
+            while (!choiceMade){
+
+            }
+
+        }
+
+    }
+
+}
 
 // to-run portion
 $(document).ready(function () {
 
-    //loadlist(quizChoice);
+    loadlist(quizChoice);
+    //quizChoice.loadList();
+
+    setTime();
 
     //testing buttons for correct/incorrect
     $("#right-button").on("click", function () {
         correct();
+        console.log("Right Answer button pushed...")
+        console.log(ansRight);
     });
 
     $("#wrong-button").on("click", function () {
         inCorrect();
+        console.log("Wrong Answer button pushed...")
+        console.log(ansWrong);
+        console.log(timeLeft);
     });
 
 
