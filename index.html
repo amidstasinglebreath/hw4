@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Game</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Added a link to Bootstrap-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+  <div class="mainContent">
+    <div class="contentHeaders">
+      Quiz Game!
+    </div>
+    <hr>
+
+    <div class="contentBody">
+
+      <div class="jumbotron">
+        <h4 class="quiz-header">Take a Quiz!</h4>
+        <hr>
+        <button type="button" class="btn btn-primary btn-block" id="option0">...</button>
+        <button type="button" class="btn btn-primary btn-block" id="option1">...</button>
+        <button type="button" class="btn btn-primary btn-block" id="option2">...</button>
+        <button type="button" class="btn btn-primary btn-block" id="option3">...</button>
+        <hr class="my-4">
+        <div class="alert alert-dark" id="answer-quality" role="alert">
+          
+        </div>
+        <p></p>
+        <p class="lead">
+          <a class="btn btn-primary .mx-auto float-left" id="right-button" role="button">Right Answer</a>
+          <a class="btn btn-danger .mx-auto float-right" id="wrong-button" role="button">Wrong Answer</a>
+        </p>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <script src="./program.js"></script>
+
+</body>
+
+</html>
