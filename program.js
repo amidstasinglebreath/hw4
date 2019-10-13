@@ -31,7 +31,7 @@ var ansWrong = 0;
 
 var turnNum = 5;
 //var curTurn = 0;
-var finished = false;
+//var finished = false;
 
 
 //will change if the available number of options is changed
@@ -50,6 +50,8 @@ var codingKey = [2, 2, 3, 0, 1]; //complete
 var swordKey = [2, 0, 0, 1, 3]; //complete
 var mythKey = [2, 2, 3, 0, 1];
 var qpKey = [2, 2, 3, 0, 1];
+
+var quizKey = [codeQuestions, swordQuestions, mythQuestions, qpQuestions];
 
 var codeQuestions = [
     {
@@ -80,6 +82,62 @@ var codeQuestions = [
 ];
 
 var swordQuestions = [
+    {
+        title: "A Claymore is a two-handed _______ variant of the basket-hilted sword.",
+        choices: ["English", "German", "Scottish", "French"],
+        answer: 2
+    },
+    {
+        title: "The unsharpened portion at the base of a blade is called the ________.",
+        choices: ["Ricasso", "Chappe", "Quillion", "Spatha"],
+        answer: 0
+    },
+    {
+        title: "Early Bronze swords were produced by a process called _______",
+        choices: ["Casting", "Forging", "Sintering", "Electroplating"],
+        answer: 0
+    },
+    {
+        title: "______ was the primary base component of post 14th century Japanese swords.",
+        choices: ["Shakudo", "Tamahagane", "Hihi'rogane", "Shibuichi"],
+        answer: 1
+    },
+    {
+        title: "Since 500 BCE this area of spain has been awell known source of high-quality sword steel.",
+        choices: ["Andalusia", "Valencia", "Galicia", "Toledo"],
+        answer: 3
+    },
+];
+
+var mythQuestions = [
+    {
+        title: "Commonly used data types DO NOT include:",
+        choices: ["strings", "booleans", "alerts", "numbers"],
+        answer: 2
+    },
+    {
+        title: "The condition in an if / else statement is enclosed within ____.",
+        choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
+        answer: 2
+    },
+    {
+        title: "The kind of loop used to run a specific number of times is a _____ loop.",
+        choices: ["while", "until", "do/while", "for"],
+        answer: 3
+    },
+    {
+        title: "The kind of loop used to run an indefinite number of times is a _____ loop.",
+        choices: ["while", "until", "do/while", "for"],
+        answer: 0
+    },
+    {
+        title: "__ is operator used to compare equivalecy between two values of the same type.",
+        choices: ["==", "===", "<", ">"],
+        answer: 1
+    }
+];
+
+var qpQuestions = [
     {
         title: "A Claymore is a two-handed _______ variant of the basket-hilted sword.",
         choices: ["English", "German", "Scottish", "French"],
@@ -139,6 +197,7 @@ function loadlist(quizFrame) {
 }
 
 //selection function that returns a value 0,1,2, or 3 based on a clicked object.
+// should modify a parent's boolean
 /*
 function selectionBTN() {
 
@@ -187,6 +246,7 @@ function setTime() {
 
 //internal logic function.
 //should take an array of questions, and the key
+// currently unused for readme reasons
 function runQuiz(questionSet, questionKey) {
     setTime();
     finished = false;
@@ -199,8 +259,7 @@ function runQuiz(questionSet, questionKey) {
             var curAns = questionKey[curTurn];
             var curChoice = null;
             loadlist(questionSet[curTurn]);
-            ///*
-            //while (curChoice == null) {
+            while (curChoice == null) {
                 //simply runs until a choice is made
                 //loop possibly not needed based on how selection button may or may not be called.
                 //var curChoice = null;
@@ -242,8 +301,7 @@ function runQuiz(questionSet, questionKey) {
                     //choiceMade = true;
                 }
 
-            //}
-            // */
+            }
 
         }
         finished = true;
@@ -259,30 +317,52 @@ function runQuiz(questionSet, questionKey) {
 $(document).ready(function () {
 
     loadlist(quizChoice);
+    var curTurn = 0;
+    var runningQuiz = false;
+    var currentQuiz;
 
     //select option 0 code quiz
     option0.addEventListener("click", function (event) {
         event.preventDefault();
-        runQuiz(codeQuestions, codingKey);
-        console.log("Code button pushed...")
+        // so the button knows its value
+        var readback = 0;
+        
+        //ensures no overlap
+        if (!runningQuiz){
+            runningQuiz = true;
+            setTime();
+            currentQuiz = 0;
+            curTurn = 0;
+        }
+        loadlist(quizKey[currentQuiz][curTurn]);
+        if (quizKey[currentQuiz][curTurn].answer === readback){
+            correct();
+            curTurn++
+        } else {
+            inCorrect();
+            curTurn++;
+        }
+        
+
     });
 
     //select option 1 
     option1.addEventListener("click", function (event) {
         event.preventDefault();
-        runQuiz(swordQuestions, swordKey);
-        console.log("sword button pushed...")
+        //repeat as 0, set readback and current quiz to option #
     });
 
     //select option 2
     option2.addEventListener("click", function (event) {
         event.preventDefault();
+        //repeat as 0, set readback and current quiz to option #
         console.log("Myth button pushed...")
     });
 
     //select option 3  
     option3.addEventListener("click", function (event) {
         event.preventDefault();
+        //repeat as 0, set readback and current quiz to option #
         console.log("Quantum physics button pushed...")
     });
 

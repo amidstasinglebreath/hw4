@@ -1,6 +1,11 @@
 # hw4
 
 # Purpose:
+To create a quiz format that allows the selection of multiple kinds of quizzes
+there are 4 kinds of quiz
+each quiz has 5 questions for which there are 4 options
+each quiz allows 80 seconds, each wrong answer deducts 10 seconds from the user's total time
+high scores are to be displayed after a quiz is completed.
 
 
 ## Development Notes:
@@ -17,6 +22,9 @@ load complete: works for quizchoice
  has something to do with how the functions are being called within the buttons, as the runquiz buttons do act as if they have been loaded from the quizchoice object
  and do not progress through the loop, however settime resets itself but decrements faster each time an active button is pressed.
  must have something to do with replacing only text and not generating new items
+
+ do not currently know how to use callbacks within functions.
+ to circumvent this, I am currently trying to put a mutable function within each button, so far unsuccessful as it is not catching the second array amount.
 
 ## To-do:
 finalize logic in running through different quiz types and questions.
