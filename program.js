@@ -292,11 +292,11 @@ function runQuiz(questionSet, questionKey) {
                     console.log("3 button pushed...")
                 });
 
-                if (curChoice == curAns){
+                if (curChoice == curAns) {
                     correct();
                     //choiceMade = true;
                 }
-                if (curChoice != null && curChoice != curAns){
+                if (curChoice != null && curChoice != curAns) {
                     inCorrect();
                     //choiceMade = true;
                 }
@@ -326,30 +326,111 @@ $(document).ready(function () {
         event.preventDefault();
         // so the button knows its value
         var readback = 0;
-        
+
         //ensures no overlap
-        if (!runningQuiz){
+        if (!runningQuiz) {
             runningQuiz = true;
             setTime();
             currentQuiz = 0;
             curTurn = 0;
         }
-        loadlist(quizKey[currentQuiz][curTurn]);
-        if (quizKey[currentQuiz][curTurn].answer === readback){
-            correct();
-            curTurn++
-        } else {
-            inCorrect();
-            curTurn++;
+        if (currentQuiz === 0) {
+            loadlist(codeQuestions[curTurn]);
+            if (codeQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
         }
-        
+        if (currentQuiz === 1) {
+            loadlist(swordQuestions[curTurn]);
+            if (swordQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 2) {
+            loadlist(mythQuestions[curTurn]);
+            if (mythQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 3) {
+            loadlist(qpQuestions[curTurn]);
+            if (qpQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+
 
     });
 
     //select option 1 
     option1.addEventListener("click", function (event) {
         event.preventDefault();
-        //repeat as 0, set readback and current quiz to option #
+        //repeat as 0, set readback to option #
+        var readback = 1;
+
+        //ensures no overlap
+        if (!runningQuiz) {
+            runningQuiz = true;
+            setTime();
+            currentQuiz = 0;
+            curTurn = 0;
+        }
+        if (currentQuiz === 0) {
+            loadlist(codeQuestions[curTurn]);
+            if (codeQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 1) {
+            loadlist(swordQuestions[curTurn]);
+            if (swordQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 2) {
+            loadlist(mythQuestions[curTurn]);
+            if (mythQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 3) {
+            loadlist(qpQuestions[curTurn]);
+            if (qpQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
     });
 
     //select option 2
@@ -357,6 +438,55 @@ $(document).ready(function () {
         event.preventDefault();
         //repeat as 0, set readback and current quiz to option #
         console.log("Myth button pushed...")
+        var readback = 2;
+
+        //ensures no overlap
+        if (!runningQuiz) {
+            runningQuiz = true;
+            setTime();
+            currentQuiz = 0;
+            curTurn = 0;
+        }
+        if (currentQuiz === 0) {
+            loadlist(codeQuestions[curTurn]);
+            if (codeQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 1) {
+            loadlist(swordQuestions[curTurn]);
+            if (swordQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 2) {
+            loadlist(mythQuestions[curTurn]);
+            if (mythQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 3) {
+            loadlist(qpQuestions[curTurn]);
+            if (qpQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
     });
 
     //select option 3  
@@ -364,6 +494,56 @@ $(document).ready(function () {
         event.preventDefault();
         //repeat as 0, set readback and current quiz to option #
         console.log("Quantum physics button pushed...")
+        var readback = 0;
+
+        //ensures no overlap
+        if (!runningQuiz) {
+            runningQuiz = true;
+            setTime();
+            currentQuiz = 0;
+            curTurn = 0;
+        }
+        if (currentQuiz === 0) {
+            loadlist(codeQuestions[curTurn]);
+            if (codeQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 1) {
+            loadlist(swordQuestions[curTurn]);
+            if (swordQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 2) {
+            loadlist(mythQuestions[curTurn]);
+            if (mythQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+        if (currentQuiz === 3) {
+            loadlist(qpQuestions[curTurn]);
+            if (qpQuestions[curTurn].answer === readback) {
+                correct();
+                curTurn++
+            } else {
+                inCorrect();
+                curTurn++;
+            }
+        }
+
     });
 
 
