@@ -11,6 +11,7 @@ Ordering:
 
 //Document attatchment declarations
 var answerState = document.querySelector("#answer-quality");
+//replace with a single class selector?
 var option0 = document.querySelector("#option0");
 var option1 = document.querySelector("#option1");
 var option2 = document.querySelector("#option2");
@@ -40,16 +41,7 @@ var optionNum = 4;
 // from now on, the title, choices pairing will be reffered to as a quizframe
 var quizChoice = {
     title: "What kind of Quiz do you want to take?",
-    choices: ["Coding", "Swords", "Mythology", "Quantum Physics"],
-    /*
-    loadList: function () {
-        quizTitle.textContent = this.title;
-        for (var i = 0; i < optionNum; i++) {
-            optionIndex[i].textContent = this.choices[i];
-        }
-    }
-    */
-
+    choices: ["Coding", "Swords", "Mythology", "Quantum Physics"]
 }
 
 // Quiz/selection arrays:
@@ -121,6 +113,7 @@ var swordQuestions = [
 //correct function
 function correct() {
     ansRight++;
+    //holders for internal logic?
     answerState.textContent = "Correct!";
     answerState.setAttribute("class", "alert alert-success");
 }
@@ -129,52 +122,136 @@ function correct() {
 function inCorrect() {
     ansWrong++;
     timeLeft -= 10;
+    //holders for internal logic?
     answerState.textContent = "Incorrect!";
     answerState.setAttribute("class", "alert alert-danger");
 }
 
 // loading/populating function/method.
 
-function loadlist(quizFrame){
+function loadlist(quizFrame) {
     console.log(quizFrame);
     quizTitle.textContent = quizFrame.title;
-    for (var i = 0; i < optionNum; i++){
+    for (var i = 0; i < optionNum; i++) {
         optionIndex[i].textContent = quizFrame.choices[i];
     }
     return 0;
 }
+
+//selection function that returns a value 0,1,2, or 3 based on a clicked object.
+/*
+function selectionBTN() {
+
+    //select option 0 returns 0 
+    option0.addEventListener("click", function (event) {
+        event.preventDefault();
+        return 0;
+    });
+
+    //select option 1 returns 1 
+    option1.addEventListener("click", function (event) {
+        event.preventDefault();
+        return 1;
+    });
+
+    //select option 2 returns 2 
+    option2.addEventListener("click", function (event) {
+        event.preventDefault();
+        return 2;
+    });
+
+    //select option 3 returns 3 
+    option3.addEventListener("click", function (event) {
+        event.preventDefault();
+        return 3;
+    });
+
+}
+*/
 
 
 // run quiz function:
 // preliminary time function
 function setTime() {
     timeLeft = timeSet;
-    var timerInterval = setInterval(function() {
-      timeLeft--;
-      timeDisplay.textContent = timeLeft;
-  
-      if(timeLeft === 0) {
-        clearInterval(timerInterval);
-      }
-  
-    }, 1000);
-  }
+    var timerInterval = setInterval(function () {
+        timeLeft--;
+        timeDisplay.textContent = timeLeft;
 
-//internal logic function.
-//should take an array of questions
-function runQuiz (){
-    while (timeLeft > 0 && !finished){
-        // checks vs. time and finished variable
-        for (var curTurn = 0; curTurn < turnNum; curTurn++){
-            // calls loadlist for 
-            var choiceMade = false;
-            while (!choiceMade){
-
-            }
-
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
         }
 
+    }, 1000);
+}
+
+//internal logic function.
+//should take an array of questions, and the key
+function runQuiz(questionSet, questionKey) {
+    setTime();
+    finished = false;
+    while (timeLeft > 0 && !finished) {
+        // checks vs. time and finished variable
+        for (var curTurn = 0; curTurn < turnNum; curTurn++) {
+            // calls loadlist for current turn's selection
+            // resets choiceMade to false
+            //var choiceMade = false;
+            var curAns = questionKey[curTurn];
+            var curChoice = null;
+            loadlist(questionSet[curTurn]);
+            ///*
+            //while (curChoice == null) {
+                //simply runs until a choice is made
+                //loop possibly not needed based on how selection button may or may not be called.
+                //var curChoice = null;
+
+                //select option 0 
+                option0.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    curChoice = 0;
+                    console.log("0 button pushed...")
+                });
+
+                //select option 1 
+                option1.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    curChoice = 1;
+                    console.log("1 button pushed...")
+                });
+
+                //select option 2
+                option2.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    placeHolder = 2;
+                    console.log("2 button pushed...")
+                });
+
+                //select option 3  
+                option3.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    curChoice = 3;
+                    console.log("3 button pushed...")
+                });
+
+                if (curChoice == curAns){
+                    correct();
+                    //choiceMade = true;
+                }
+                if (curChoice != null && curChoice != curAns){
+                    inCorrect();
+                    //choiceMade = true;
+                }
+
+            //}
+            // */
+
+        }
+        finished = true;
+
     }
+
+    console.log("finished...");
+    //if/else for score:?
 
 }
 
@@ -182,9 +259,33 @@ function runQuiz (){
 $(document).ready(function () {
 
     loadlist(quizChoice);
-    //quizChoice.loadList();
 
-    setTime();
+    //select option 0 code quiz
+    option0.addEventListener("click", function (event) {
+        event.preventDefault();
+        runQuiz(codeQuestions, codingKey);
+        console.log("Code button pushed...")
+    });
+
+    //select option 1 
+    option1.addEventListener("click", function (event) {
+        event.preventDefault();
+        runQuiz(swordQuestions, swordKey);
+        console.log("sword button pushed...")
+    });
+
+    //select option 2
+    option2.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("Myth button pushed...")
+    });
+
+    //select option 3  
+    option3.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("Quantum physics button pushed...")
+    });
+
 
     //testing buttons for correct/incorrect
     $("#right-button").on("click", function () {
